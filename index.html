@@ -7,44 +7,44 @@
     <style>
         :root {
             --bg-color: #080c14;
-            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-bg: rgba(17, 24, 39, 0.78);
             --border-color: rgba(227, 171, 32, 0.25);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
             --accent: #E3AB20;
-            --accent-hover: #fcca3f;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
         body {
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 10%, rgba(227, 171, 32, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 50% 8%, rgba(227, 171, 32, 0.14) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(59, 130, 246, 0.08) 0%, transparent 45%);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 24px 16px;
+            padding: 28px 16px;
         }
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: 28px;
-            padding: 32px 22px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+            padding: 28px 20px;
+            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75);
             text-align: center;
-            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 1. Language Switcher */
         .lang-selector {
             display: flex;
             justify-content: center;
@@ -61,7 +61,7 @@
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
         }
         .lang-btn.active, .lang-btn:hover {
             background: var(--accent);
@@ -69,26 +69,26 @@
             color: #080c14;
             transform: translateY(-1px);
         }
+
+        /* 2. Bagian Atas: Profile Utama */
         .avatar {
             width: 96px;
             height: 96px;
             border-radius: 32px;
             border: 2px solid var(--accent);
             object-fit: cover;
-            margin: 0 auto 16px;
+            margin: 0 auto 14px;
             box-shadow: 0 0 28px rgba(227, 171, 32, 0.3);
             transition: transform 0.3s ease;
         }
-        .avatar:hover { transform: scale(1.04); }
-
+        .avatar:hover { transform: scale(1.05); }
         h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .subtitle { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 18px; white-space: pre-line; line-height: 1.4; }
-        
+        .subtitle { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
         .chips-container {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
         }
         .chip {
@@ -101,43 +101,40 @@
             font-weight: 500;
         }
 
-        .about-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 22px;
+        /* 3. Bagian Tengah: Kartu Preview Saluran Official WhatsApp */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
             text-align: left;
+            padding-left: 4px;
         }
-        .about-title { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .about-list { list-style: none; font-size: 12px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 7px; }
-        .about-list li { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
-        .about-list li::before { content: "⚡"; color: var(--accent); flex-shrink: 0; }
-
-        /* WhatsApp Channel Preview Card Style */
         .wa-preview-card {
             display: block;
-            background: rgba(20, 30, 48, 0.85);
-            border: 1px solid rgba(227, 171, 32, 0.3);
-            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(227, 171, 32, 0.35);
+            border-radius: 18px;
             overflow: hidden;
             text-decoration: none;
-            margin-bottom: 14px;
+            margin-bottom: 24px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: left;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
         }
         .wa-preview-card:hover {
             border-color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(227, 171, 32, 0.25);
+            box-shadow: 0 14px 32px rgba(227, 171, 32, 0.25);
         }
         .wa-preview-header {
-            padding: 12px 14px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.2);
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .wa-app-icon {
@@ -149,19 +146,18 @@
             align-items: center;
             justify-content: center;
             font-size: 10px;
-            color: white;
-            font-weight: bold;
+            color: #fff;
+            font-weight: 800;
         }
         .wa-app-meta { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
         .wa-preview-banner {
             width: 100%;
-            height: 140px;
+            height: 165px;
             object-fit: cover;
+            display: block;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .wa-preview-body {
-            padding: 14px;
-        }
+        .wa-preview-body { padding: 14px; }
         .wa-channel-title {
             font-size: 14px;
             font-weight: 700;
@@ -171,16 +167,28 @@
             align-items: center;
             gap: 6px;
         }
-        .verified-badge {
-            color: #25D366;
-            font-size: 12px;
+        .verified-badge { color: #25D366; font-size: 13px; }
+        .wa-channel-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; }
+
+        /* 4. Bagian Bawah: Live Embed GitHub README Assets */
+        .live-readme-box {
+            background: rgba(11, 15, 25, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 14px 10px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .wa-channel-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.4;
+        .live-readme-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
         }
 
+        /* Links & Socials */
         .links { display: flex; flex-direction: column; gap: 10px; }
         .link-btn {
             display: flex;
@@ -203,7 +211,6 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(227, 171, 32, 0.25);
         }
-
         .socials {
             display: flex;
             justify-content: center;
@@ -221,83 +228,73 @@
             justify-content: center;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             transition: all 0.2s;
         }
         .social-icon:hover { background: var(--accent); color: #080c14; border-color: var(--accent); }
-
-        .footer {
-            margin-top: 22px;
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
+        .footer { margin-top: 22px; font-size: 11px; color: var(--text-secondary); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Pengaturan Bahasa -->
+        <!-- Switcher 5 Bahasa -->
         <div class="lang-selector">
-            <button class="lang-btn active" onclick="setLanguage('id')">ID</button>
-            <button class="lang-btn" onclick="setLanguage('en-us')">EN-US</button>
-            <button class="lang-btn" onclick="setLanguage('en-uk')">EN-UK</button>
-            <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
-            <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+            <button class="lang-btn active" onclick="setLanguage('id', this)">ID</button>
+            <button class="lang-btn" onclick="setLanguage('en-us', this)">EN-US</button>
+            <button class="lang-btn" onclick="setLanguage('en-uk', this)">EN-UK</button>
+            <button class="lang-btn" onclick="setLanguage('ru', this)">RU</button>
+            <button class="lang-btn" onclick="setLanguage('zh', this)">ZH</button>
         </div>
 
-        <!-- Avatar / Cookie Shape -->
-        <img src="https://avatars.githubusercontent.com/u/afh21-21" alt="afh21-21" class="avatar">
-        
+        <!-- 1. ATAS: PROFIL UTAMA -->
+        <img src="assets/avatar.png" alt="afh21-21" class="avatar" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
         <h1>afh21-21</h1>
         <div class="subtitle">The Craftmanship and The Ownership of<br>©⌬The_Flynner's⌬_</div>
-
-        <!-- Chips Stack -->
         <div class="chips-container">
             <span class="chip">TypeScript · Node.js</span>
             <span class="chip">Android Developer</span>
         </div>
 
-        <!-- About Me Section -->
-        <div class="about-box">
-            <div class="about-title" id="txt-about-title">About Me & My Enthusiast</div>
-            <ul class="about-list">
-                <li id="item-1">Building WolfieMD & Automated Digital Realms</li>
-                <li id="item-2">Independent Bot Crafter & System Tinkerer</li>
-                <li id="item-3">The Chaos Control — Gotta Go Fast!</li>
-                <li id="item-4">Business is Business, Learn That.</li>
-            </ul>
-        </div>
-
-        <!-- WhatsApp Channel Preview Card (Persis ala Screenshot Preview) -->
-        <a href="https://whatsapp.com/channel/0029Vb8zOo4Equin4xtNHJ2q/" target="_blank" class="wa-preview-card">
+        <!-- 2. TENGAH: SALURAN OFFICIAL WHATSAPP -->
+        <div class="section-label" id="lbl-official">Official Channel</div>
+        <a href="https://whatsapp.com/channel/0029Vb8z0o4EquiN4xtNHJ2q" target="_blank" class="wa-preview-card">
             <div class="wa-preview-header">
                 <div class="wa-app-icon">W</div>
-                <div class="wa-app-meta">WhatsApp Business • Status</div>
+                <div class="wa-app-meta">WhatsApp Business • Channel</div>
             </div>
-            <!-- Banner/Gambar Preview Saluran (Bisa disesuaikan pakai aset Sonic/Mr.Wolf) -->
-            <img src="https://avatars.githubusercontent.com/u/afh21-21" alt="Channel Banner" class="wa-preview-banner" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500'">
+            <img src="assets/channel-banner.png" alt="Saluran Resmi The_Flynner's" class="wa-preview-banner" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
             <div class="wa-preview-body">
                 <div class="wa-channel-title">
                     <span id="txt-channel-name">Saluran Resmi ©⌬The_Flynner's⌬_</span>
                     <span class="verified-badge">✔</span>
                 </div>
                 <div class="wa-channel-desc" id="txt-channel-desc">
-                    System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.
+                    Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.
                 </div>
             </div>
         </a>
 
-        <!-- Links Utama Lainnya -->
-        <div class="links">
-            <a href="https://github.com/afh21-21?tab=repositories" target="_blank" class="link-btn" id="btn-repos">All Repositories</a>
-            <a href="https://github.com/afh21-21" target="_blank" class="link-btn" id="btn-github">GitHub Profile</a>
+        <!-- 3. BAWAH: LIVE EMBED README GITHUB (OTOMATIS SINKRON) -->
+        <div class="section-label" id="lbl-readme">Live GitHub Profile</div>
+        <div class="live-readme-box">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/about-dark.svg" alt="About Me">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stack-dark.svg" alt="Tech Stack">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stats-dark.svg" alt="GitHub Activity">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/streak-dark.svg" alt="Streak">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/wave-dark.svg" alt="Wave">
         </div>
 
-        <!-- Social Media Icons -->
+        <!-- TOMBOL & SOSIAL MEDIA -->
+        <div class="links">
+            <a href="https://github.com/afh21-21?tab=repositories" target="_blank" class="link-btn" id="btn-repos">Semua Repositori</a>
+            <a href="https://github.com/afh21-21" target="_blank" class="link-btn" id="btn-github">Profil GitHub</a>
+        </div>
+
         <div class="socials">
-            <a href="https://t.me/@LeonardoFlynn" target="_blank" class="social-icon" title="Telegram">TG</a>
-            <a href="https://discord.com/channels/@me" target="_blank" class="social-icon" title="Discord">DC</a>
+            <a href="https://t.me/LeonardoFlynn" target="_blank" class="social-icon" title="Telegram">TG</a>
+            <a href="https://discord.com/users/1352214863895728128" target="_blank" class="social-icon" title="Discord">DC</a>
             <a href="https://github.com/afh21-21" target="_blank" class="social-icon" title="GitHub">GH</a>
         </div>
 
@@ -309,84 +306,56 @@
     <script>
         const translations = {
             id: {
-                aboutTitle: "Tentang Saya & Antusiasme",
-                items: [
-                    "Membangun WolfieMD & Alam Digital Otomatis",
-                    "Perajin Bot Mandiri & Perakit Sistem",
-                    "The Chaos Control — Bergerak Cepat!",
-                    "Bisnis adalah Bisnis, Pelajari Itu."
-                ],
+                lblOfficial: "Saluran Resmi",
                 channelName: "Saluran Resmi ©⌬The_Flynner's⌬_",
                 channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.",
+                lblReadme: "Profil GitHub Langsung",
                 repos: "Semua Repositori",
                 github: "Profil GitHub"
             },
             "en-us": {
-                aboutTitle: "About Me & My Enthusiast",
-                items: [
-                    "Building WolfieMD & Automated Digital Realms",
-                    "Independent Bot Crafter & System Tinkerer",
-                    "The Chaos Control — Gotta Go Fast!",
-                    "Business is Business, Learn That."
-                ],
+                lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.",
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
+                lblReadme: "Live GitHub Profile",
                 repos: "All Repositories",
                 github: "GitHub Profile"
             },
             "en-uk": {
-                aboutTitle: "About Me & My Enthusiast",
-                items: [
-                    "Building WolfieMD & Automated Digital Realms",
-                    "Independent Bot Crafter & System Tinkerer",
-                    "The Chaos Control — Gotta Go Fast!",
-                    "Business is Business, Learn That."
-                ],
+                lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.",
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
+                lblReadme: "Live GitHub Profile",
                 repos: "All Repositories",
                 github: "GitHub Profile"
             },
             ru: {
-                aboutTitle: "Обо мне и увлечениях",
-                items: [
-                    "Создание WolfieMD и автоматизированных цифровых миров",
-                    "Независимый разработчик ботов и системный энтузиаст",
-                    "The Chaos Control — Быстрее!",
-                    "Бизнес есть бизнес, усвой это."
-                ],
+                lblOfficial: "Официальный канал",
                 channelName: "Официальный канал ©⌬The_Flynner's⌬_",
-                channelDesc: "Обновление системного репозитория и экосистемы ботов Mr.Wolf & WolfieMD.",
+                channelDesc: "Обновления системного репозитория, улучшения ядра и экосистема ботов Mr.Wolf & WolfieMD.",
+                lblReadme: "Живой профиль GitHub",
                 repos: "Все репозитории",
                 github: "Профиль GitHub"
             },
             zh: {
-                aboutTitle: "关于我与兴趣",
-                items: [
-                    "构建 WolfieMD 与自动化数字领域",
-                    "独立机器人制作者与系统组装者",
-                    "混乱控制 — 极速前进！",
-                    "商场如战场，记住这点。"
-                ],
+                lblOfficial: "官方频道",
                 channelName: "©⌬The_Flynner's⌬_ 官方频道",
-                channelDesc: "系统仓库已更新，包含 Mr.Wolf 与 WolfieMD 生态系统的最新核心改进。",
+                channelDesc: "系统仓库更新、核心改进以及 Mr.Wolf 与 WolfieMD 机器人生态系统。",
+                lblReadme: "GitHub 实时主页",
                 repos: "所有仓库",
                 github: "GitHub 主页"
             }
         };
 
-        function setLanguage(lang) {
+        function setLanguage(lang, btnElement) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            btnElement.classList.add('active');
 
             const t = translations[lang];
-            document.getElementById('txt-about-title').innerText = t.aboutTitle;
-            document.getElementById('item-1').innerText = t.items[0];
-            document.getElementById('item-2').innerText = t.items[1];
-            document.getElementById('item-3').innerText = t.items[2];
-            document.getElementById('item-4').innerText = t.items[3];
+            document.getElementById('lbl-official').innerText = t.lblOfficial;
             document.getElementById('txt-channel-name').innerText = t.channelName;
             document.getElementById('txt-channel-desc').innerText = t.channelDesc;
+            document.getElementById('lbl-readme').innerText = t.lblReadme;
             document.getElementById('btn-repos').innerText = t.repos;
             document.getElementById('btn-github').innerText = t.github;
             
