@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en-us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-color: #080c14;
-            --card-bg: rgba(17, 24, 39, 0.85);
+            --card-bg: rgba(17, 24, 39, 0.82);
             --border-color: rgba(227, 171, 32, 0.25);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
@@ -24,18 +24,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 24px 16px;
+            padding: 28px 16px;
         }
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: 28px;
-            padding: 30px 20px;
+            padding: 28px 20px;
             box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75);
             text-align: center;
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -45,7 +44,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Language Switcher */
+        /* Language Switcher (EN-US Paling Depan, ID Paling Belakang) */
         .lang-selector {
             display: flex;
             justify-content: center;
@@ -89,7 +88,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
         }
         .chip {
@@ -113,7 +112,7 @@
             padding-left: 4px;
         }
 
-        /* WhatsApp Channel Preview Card (Banner Kotak Rapi) */
+        /* WhatsApp Channel Preview Card (Banner Kotak Mengandalkan channel-banner.png) */
         .wa-preview-card {
             display: block;
             background: rgba(15, 23, 42, 0.9);
@@ -121,7 +120,7 @@
             border-radius: 18px;
             overflow: hidden;
             text-decoration: none;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: left;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
@@ -154,7 +153,7 @@
         .wa-app-meta { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
         .wa-preview-banner {
             width: 100%;
-            height: 190px;
+            height: 200px;
             object-fit: cover;
             display: block;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -172,7 +171,25 @@
         .verified-badge { color: #25D366; font-size: 13px; }
         .wa-channel-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; }
 
-        /* Ikon Sosial Media (Gaya Badge Stiker) */
+        /* Live GitHub Profile Embed Box */
+        .live-readme-box {
+            background: rgba(11, 15, 25, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 14px 10px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .live-readme-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        /* Ikon Sosial Media ala Badge Stiker README */
         .socials {
             display: flex;
             justify-content: center;
@@ -212,7 +229,7 @@
             color: var(--accent);
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .footer { font-size: 11px; color: var(--text-secondary); }
     </style>
@@ -220,16 +237,16 @@
 <body>
 
     <div class="container">
-        <!-- Switcher 5 Bahasa -->
+        <!-- Switcher Bahasa (EN-US Utama, ID di Belakang) -->
         <div class="lang-selector">
-            <button class="lang-btn active" onclick="setLanguage('id', this)">ID</button>
-            <button class="lang-btn" onclick="setLanguage('en-us', this)">EN-US</button>
+            <button class="lang-btn active" onclick="setLanguage('en-us', this)">EN-US</button>
             <button class="lang-btn" onclick="setLanguage('en-uk', this)">EN-UK</button>
             <button class="lang-btn" onclick="setLanguage('ru', this)">RU</button>
             <button class="lang-btn" onclick="setLanguage('zh', this)">ZH</button>
+            <button class="lang-btn" onclick="setLanguage('id', this)">ID</button>
         </div>
 
-        <!-- 1. PROFIL UTAMA -->
+        <!-- 1. ATAS: PROFIL UTAMA -->
         <img src="assets/avatar.png" alt="afh21-21" class="avatar" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
         <h1>afh21-21</h1>
         <div class="subtitle">The Craftmanship and The Ownership of<br>©⌬The_Flynner's⌬_</div>
@@ -238,7 +255,7 @@
             <span class="chip">Android Developer</span>
         </div>
 
-        <!-- 2. SALURAN OFFICIAL WHATSAPP (BANNER KOTAK ASSET LOKAL) -->
+        <!-- 2. TENGAH: SALURAN OFFICIAL WHATSAPP (MENGANDALKAN channel-banner.png) -->
         <div class="section-label" id="lbl-official">Official Channel</div>
         <a href="https://whatsapp.com/channel/0029Vb8z0o4EquiN4xtNHJ2q" target="_blank" class="wa-preview-card">
             <div class="wa-preview-header">
@@ -248,16 +265,26 @@
             <img src="assets/channel-banner.jpg" alt="Saluran Resmi The_Flynner's" class="wa-preview-banner" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
             <div class="wa-preview-body">
                 <div class="wa-channel-title">
-                    <span id="txt-channel-name">Saluran Resmi ©⌬The_Flynner's⌬_</span>
+                    <span id="txt-channel-name">The_Flynner's Official Channel</span>
                     <span class="verified-badge">✔</span>
                 </div>
                 <div class="wa-channel-desc" id="txt-channel-desc">
-                    Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.
+                    System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.
                 </div>
             </div>
         </a>
 
-        <!-- 3. IKON SOSIAL MEDIA (GAYA BADGE STIKER) -->
+        <!-- 3. BAWAH: LIVE EMBED README GITHUB -->
+        <div class="section-label" id="lbl-readme">Live GitHub Profile</div>
+        <div class="live-readme-box">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/about-dark.svg" alt="About Me">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stack-dark.svg" alt="Tech Stack">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stats-dark.svg" alt="GitHub Activity">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/streak-dark.svg" alt="Streak">
+            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/wave-dark.svg" alt="Wave">
+        </div>
+
+        <!-- IKON SOSIAL MEDIA -->
         <div class="socials">
             <!-- Telegram -->
             <a href="https://t.me/LeonardoFlynn" target="_blank" class="social-icon" title="Telegram">
@@ -280,30 +307,35 @@
 
     <script>
         const translations = {
-            id: {
-                lblOfficial: "Saluran Resmi",
-                channelName: "Saluran Resmi ©⌬The_Flynner's⌬_",
-                channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD."
-            },
             "en-us": {
                 lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem."
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
+                lblReadme: "Live GitHub Profile"
             },
             "en-uk": {
                 lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem."
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
+                lblReadme: "Live GitHub Profile"
             },
             ru: {
                 lblOfficial: "Официальный канал",
                 channelName: "Официальный канал ©⌬The_Flynner's⌬_",
-                channelDesc: "Обновления системного репозитория, улучшения ядра и экосистема ботов Mr.Wolf & WolfieMD."
+                channelDesc: "Обновления системного репозитория, улучшения ядра и экосистема ботов Mr.Wolf & WolfieMD.",
+                lblReadme: "Живой профиль GitHub"
             },
             zh: {
                 lblOfficial: "官方频道",
                 channelName: "©⌬The_Flynner's⌬_ 官方频道",
-                channelDesc: "系统仓库更新、核心改进以及 Mr.Wolf 与 WolfieMD 机器人生态系统。"
+                channelDesc: "系统仓库更新、核心改进以及 Mr.Wolf 与 WolfieMD 机器人生态系统。",
+                lblReadme: "GitHub 实时主页"
+            },
+            id: {
+                lblOfficial: "Saluran Resmi",
+                channelName: "Saluran Resmi ©⌬The_Flynner's⌬_",
+                channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.",
+                lblReadme: "Profil GitHub Langsung"
             }
         };
 
@@ -315,6 +347,7 @@
             document.getElementById('lbl-official').innerText = t.lblOfficial;
             document.getElementById('txt-channel-name').innerText = t.channelName;
             document.getElementById('txt-channel-desc').innerText = t.channelDesc;
+            document.getElementById('lbl-readme').innerText = t.lblReadme;
             
             document.documentElement.lang = lang;
         }
