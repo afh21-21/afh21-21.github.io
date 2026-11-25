@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>afh21-21 | ©⌬The_Flynner's⌬_</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --border-color: rgba(227, 171, 32, 0.2);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #E3AB20;
+            --accent-hover: #fcca3f;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% 20%, rgba(227, 171, 32, 0.08) 0%, transparent 60%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+        .lang-selector {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active, .lang-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0b0f19;
+        }
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 28px;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+            margin: 0 auto 16px;
+            box-shadow: 0 0 24px rgba(227, 171, 32, 0.25);
+        }
+        h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .subtitle { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 20px; white-space: pre-line; line-height: 1.4; }
+        
+        .chips-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .chip {
+            background: rgba(227, 171, 32, 0.1);
+            border: 1px solid rgba(227, 171, 32, 0.3);
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .about-box {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .about-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+        .about-list { list-style: none; font-size: 12px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 6px; }
+        .about-list li::before { content: "⚡ "; color: var(--accent); }
+
+        .links { display: flex; flex-direction: column; gap: 12px; }
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 14px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .link-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #0b0f19;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(227, 171, 32, 0.3);
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .social-icon:hover { background: var(--accent); color: #0b0f19; }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Pengaturan Bahasa -->
+        <div class="lang-selector">
+            <button class="lang-btn active" onclick="setLanguage('id')">ID</button>
+            <button class="lang-btn" onclick="setLanguage('en-us')">EN-US</button>
+            <button class="lang-btn" onclick="setLanguage('en-uk')">EN-UK</button>
+            <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
+            <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+        </div>
+
+        <!-- Avatar / Cookie Shape -->
+        <img src="https://avatars.githubusercontent.com/u/afh21-21" alt="afh21-21" class="avatar">
+        
+        <h1>afh21-21</h1>
+        <div class="subtitle">The Craftmanship and The Ownership of<br>©⌬The_Flynner's⌬_</div>
+
+        <!-- Chips Stack -->
+        <div class="chips-container">
+            <span class="chip">TypeScript · Node.js</span>
+            <span class="chip">Android Developer</span>
+        </div>
+
+        <!-- About Me Section -->
+        <div class="about-box">
+            <div class="about-title" id="txt-about-title">About Me & My Enthusiast</div>
+            <ul class="about-list">
+                <li id="item-1">Building WolfieMD & Automated Digital Realms</li>
+                <li id="item-2">Independent Bot Crafter & System Tinkerer</li>
+                <li id="item-3">The Chaos Control — Gotta Go Fast!</li>
+                <li id="item-4">Business is Business, Learn That.</li>
+            </ul>
+        </div>
+
+        <!-- Links Utama -->
+        <div class="links">
+            <a href="https://github.com/afh21-21?tab=repositories" target="_blank" class="link-btn" id="btn-repos">All Repositories</a>
+            <a href="https://github.com/afh21-21" target="_blank" class="link-btn" id="btn-github">GitHub Profile</a>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="socials">
+            <a href="https://t.me/@LeonardoFlynn" target="_blank" class="social-icon" title="Telegram">TG</a>
+            <a href="https://discord.com/channels/@me" target="_blank" class="social-icon" title="Discord">DC</a>
+            <a href="https://github.com/afh21-21" target="_blank" class="social-icon" title="GitHub">GH</a>
+        </div>
+
+        <div class="footer">
+            © 2026 afh21-21. Made with Me.
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            id: {
+                aboutTitle: "Tentang Saya & Antusiasme",
+                items: [
+                    "Membangun WolfieMD & Alam Digital Otomatis",
+                    "Perajin Bot Mandiri & Perakit Sistem",
+                    "The Chaos Control — Bergerak Cepat!",
+                    "Bisnis adalah Bisnis, Pelajari Itu."
+                ],
+                repos: "Semua Repositori",
+                github: "Profil GitHub"
+            },
+            "en-us": {
+                aboutTitle: "About Me & My Enthusiast",
+                items: [
+                    "Building WolfieMD & Automated Digital Realms",
+                    "Independent Bot Crafter & System Tinkerer",
+                    "The Chaos Control — Gotta Go Fast!",
+                    "Business is Business, Learn That."
+                ],
+                repos: "All Repositories",
+                github: "GitHub Profile"
+            },
+            "en-uk": {
+                aboutTitle: "About Me & My Enthusiast",
+                items: [
+                    "Building WolfieMD & Automated Digital Realms",
+                    "Independent Bot Crafter & System Tinkerer",
+                    "The Chaos Control — Gotta Go Fast!",
+                    "Business is Business, Learn That."
+                ],
+                repos: "All Repositories",
+                github: "GitHub Profile"
+            },
+            ru: {
+                aboutTitle: "Обо мне и увлечениях",
+                items: [
+                    "Создание WolfieMD и автоматизированных цифровых миров",
+                    "Независимый разработчик ботов и системный энтузиаст",
+                    "The Chaos Control — Быстрее!",
+                    "Бизнес есть бизнес, усвой это."
+                ],
+                repos: "Все репозитории",
+                github: "Профиль GitHub"
+            },
+            zh: {
+                aboutTitle: "关于我与兴趣",
+                items: [
+                    "构建 WolfieMD 与自动化数字领域",
+                    "独立机器人制作者与系统组装者",
+                    "混乱控制 — 极速前进！",
+                    "商场如战场，记住这点。"
+                ],
+                repos: "所有仓库",
+                github: "GitHub 主页"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const t = translations[lang];
+            document.getElementById('txt-about-title').innerText = t.aboutTitle;
+            document.getElementById('item-1').innerText = t.items[0];
+            document.getElementById('item-2').innerText = t.items[1];
+            document.getElementById('item-3').innerText = t.items[2];
+            document.getElementById('item-4').innerText = t.items[3];
+            document.getElementById('btn-repos').innerText = t.repos;
+            document.getElementById('btn-github').innerText = t.github;
+            
+            document.documentElement.lang = lang;
+        }
+    </script>
+</body>
+</html>
