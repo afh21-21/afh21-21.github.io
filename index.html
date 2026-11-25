@@ -6,9 +6,9 @@
     <title>afh21-21 | ©⌬The_Flynner's⌬_</title>
     <style>
         :root {
-            --bg-color: #0b0f19;
+            --bg-color: #080c14;
             --card-bg: rgba(17, 24, 39, 0.75);
-            --border-color: rgba(227, 171, 32, 0.2);
+            --border-color: rgba(227, 171, 32, 0.25);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
             --accent: #E3AB20;
@@ -17,7 +17,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
         body {
             background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% 20%, rgba(227, 171, 32, 0.08) 0%, transparent 60%);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(227, 171, 32, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -28,24 +30,30 @@
         }
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 32px 24px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+            border-radius: 28px;
+            padding: 32px 22px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
             text-align: center;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .lang-selector {
             display: flex;
             justify-content: center;
             gap: 6px;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
         }
         .lang-btn {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
             padding: 5px 10px;
@@ -53,24 +61,28 @@
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .lang-btn.active, .lang-btn:hover {
             background: var(--accent);
             border-color: var(--accent);
-            color: #0b0f19;
+            color: #080c14;
+            transform: translateY(-1px);
         }
         .avatar {
             width: 96px;
             height: 96px;
-            border-radius: 28px;
+            border-radius: 32px;
             border: 2px solid var(--accent);
             object-fit: cover;
             margin: 0 auto 16px;
-            box-shadow: 0 0 24px rgba(227, 171, 32, 0.25);
+            box-shadow: 0 0 28px rgba(227, 171, 32, 0.3);
+            transition: transform 0.3s ease;
         }
-        h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
-        .subtitle { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 20px; white-space: pre-line; line-height: 1.4; }
+        .avatar:hover { transform: scale(1.04); }
+
+        h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .subtitle { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 18px; white-space: pre-line; line-height: 1.4; }
         
         .chips-container {
             display: flex;
@@ -80,28 +92,96 @@
             flex-wrap: wrap;
         }
         .chip {
-            background: rgba(227, 171, 32, 0.1);
-            border: 1px solid rgba(227, 171, 32, 0.3);
+            background: rgba(227, 171, 32, 0.08);
+            border: 1px solid rgba(227, 171, 32, 0.25);
             color: var(--text-primary);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 500;
         }
 
         .about-box {
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 22px;
             text-align: left;
         }
-        .about-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-        .about-list { list-style: none; font-size: 12px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 6px; }
-        .about-list li::before { content: "⚡ "; color: var(--accent); }
+        .about-title { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .about-list { list-style: none; font-size: 12px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 7px; }
+        .about-list li { display: flex; align-items: flex-start; gap: 6px; line-height: 1.4; }
+        .about-list li::before { content: "⚡"; color: var(--accent); flex-shrink: 0; }
 
-        .links { display: flex; flex-direction: column; gap: 12px; }
+        /* WhatsApp Channel Preview Card Style */
+        .wa-preview-card {
+            display: block;
+            background: rgba(20, 30, 48, 0.85);
+            border: 1px solid rgba(227, 171, 32, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            margin-bottom: 14px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .wa-preview-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(227, 171, 32, 0.25);
+        }
+        .wa-preview-header {
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .wa-app-icon {
+            width: 18px;
+            height: 18px;
+            background: #25D366;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        .wa-app-meta { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+        .wa-preview-banner {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .wa-preview-body {
+            padding: 14px;
+        }
+        .wa-channel-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .verified-badge {
+            color: #25D366;
+            font-size: 12px;
+        }
+        .wa-channel-desc {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .links { display: flex; flex-direction: column; gap: 10px; }
         .link-btn {
             display: flex;
             align-items: center;
@@ -110,44 +190,45 @@
             border: 1px solid var(--border-color);
             color: var(--text-primary);
             text-decoration: none;
-            padding: 14px 16px;
+            padding: 13px 16px;
             border-radius: 14px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
         .link-btn:hover {
             background: var(--accent);
             border-color: var(--accent);
-            color: #0b0f19;
+            color: #080c14;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(227, 171, 32, 0.3);
+            box-shadow: 0 6px 16px rgba(227, 171, 32, 0.25);
         }
 
         .socials {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 18px;
         }
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
             transition: all 0.2s;
         }
-        .social-icon:hover { background: var(--accent); color: #0b0f19; }
+        .social-icon:hover { background: var(--accent); color: #080c14; border-color: var(--accent); }
 
         .footer {
-            margin-top: 24px;
+            margin-top: 22px;
             font-size: 11px;
             color: var(--text-secondary);
         }
@@ -188,7 +269,26 @@
             </ul>
         </div>
 
-        <!-- Links Utama -->
+        <!-- WhatsApp Channel Preview Card (Persis ala Screenshot Preview) -->
+        <a href="https://whatsapp.com/channel/0029Vb8zOo4Equin4xtNHJ2q/" target="_blank" class="wa-preview-card">
+            <div class="wa-preview-header">
+                <div class="wa-app-icon">W</div>
+                <div class="wa-app-meta">WhatsApp Business • Status</div>
+            </div>
+            <!-- Banner/Gambar Preview Saluran (Bisa disesuaikan pakai aset Sonic/Mr.Wolf) -->
+            <img src="https://avatars.githubusercontent.com/u/afh21-21" alt="Channel Banner" class="wa-preview-banner" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500'">
+            <div class="wa-preview-body">
+                <div class="wa-channel-title">
+                    <span id="txt-channel-name">Saluran Resmi ©⌬The_Flynner's⌬_</span>
+                    <span class="verified-badge">✔</span>
+                </div>
+                <div class="wa-channel-desc" id="txt-channel-desc">
+                    System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.
+                </div>
+            </div>
+        </a>
+
+        <!-- Links Utama Lainnya -->
         <div class="links">
             <a href="https://github.com/afh21-21?tab=repositories" target="_blank" class="link-btn" id="btn-repos">All Repositories</a>
             <a href="https://github.com/afh21-21" target="_blank" class="link-btn" id="btn-github">GitHub Profile</a>
@@ -202,7 +302,7 @@
         </div>
 
         <div class="footer">
-            © 2026 afh21-21. Made with Me.
+            © 2026 afh21-21. Zero bloat, maximum performance.
         </div>
     </div>
 
@@ -216,6 +316,8 @@
                     "The Chaos Control — Bergerak Cepat!",
                     "Bisnis adalah Bisnis, Pelajari Itu."
                 ],
+                channelName: "Saluran Resmi ©⌬The_Flynner's⌬_",
+                channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.",
                 repos: "Semua Repositori",
                 github: "Profil GitHub"
             },
@@ -227,6 +329,8 @@
                     "The Chaos Control — Gotta Go Fast!",
                     "Business is Business, Learn That."
                 ],
+                channelName: "The_Flynner's Official Channel",
+                channelDesc: "System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.",
                 repos: "All Repositories",
                 github: "GitHub Profile"
             },
@@ -238,6 +342,8 @@
                     "The Chaos Control — Gotta Go Fast!",
                     "Business is Business, Learn That."
                 ],
+                channelName: "The_Flynner's Official Channel",
+                channelDesc: "System repository updated with the latest core improvements for Mr.Wolf & WolfieMD ecosystem.",
                 repos: "All Repositories",
                 github: "GitHub Profile"
             },
@@ -249,6 +355,8 @@
                     "The Chaos Control — Быстрее!",
                     "Бизнес есть бизнес, усвой это."
                 ],
+                channelName: "Официальный канал ©⌬The_Flynner's⌬_",
+                channelDesc: "Обновление системного репозитория и экосистемы ботов Mr.Wolf & WolfieMD.",
                 repos: "Все репозитории",
                 github: "Профиль GitHub"
             },
@@ -260,6 +368,8 @@
                     "混乱控制 — 极速前进！",
                     "商场如战场，记住这点。"
                 ],
+                channelName: "©⌬The_Flynner's⌬_ 官方频道",
+                channelDesc: "系统仓库已更新，包含 Mr.Wolf 与 WolfieMD 生态系统的最新核心改进。",
                 repos: "所有仓库",
                 github: "GitHub 主页"
             }
@@ -275,6 +385,8 @@
             document.getElementById('item-2').innerText = t.items[1];
             document.getElementById('item-3').innerText = t.items[2];
             document.getElementById('item-4').innerText = t.items[3];
+            document.getElementById('txt-channel-name').innerText = t.channelName;
+            document.getElementById('txt-channel-desc').innerText = t.channelDesc;
             document.getElementById('btn-repos').innerText = t.repos;
             document.getElementById('btn-github').innerText = t.github;
             
