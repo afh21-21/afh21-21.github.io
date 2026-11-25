@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-color: #080c14;
-            --card-bg: rgba(17, 24, 39, 0.82);
+            --card-bg: rgba(17, 24, 39, 0.85);
             --border-color: rgba(227, 171, 32, 0.25);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
@@ -24,17 +24,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 28px 16px;
+            justify-content: center;
+            padding: 24px 16px;
         }
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-color);
             border-radius: 28px;
-            padding: 28px 20px;
+            padding: 30px 20px;
             box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75);
             text-align: center;
             animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -88,7 +89,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             flex-wrap: wrap;
         }
         .chip {
@@ -112,7 +113,7 @@
             padding-left: 4px;
         }
 
-        /* WhatsApp Channel Preview Card (Banner Kotak & Aset Lokal) */
+        /* WhatsApp Channel Preview Card (Banner Kotak Rapi) */
         .wa-preview-card {
             display: block;
             background: rgba(15, 23, 42, 0.9);
@@ -120,7 +121,7 @@
             border-radius: 18px;
             overflow: hidden;
             text-decoration: none;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: left;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
@@ -153,7 +154,7 @@
         .wa-app-meta { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
         .wa-preview-banner {
             width: 100%;
-            height: 200px;
+            height: 190px;
             object-fit: cover;
             display: block;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -171,54 +172,12 @@
         .verified-badge { color: #25D366; font-size: 13px; }
         .wa-channel-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; }
 
-        /* Live GitHub Profile Embed Box */
-        .live-readme-box {
-            background: rgba(11, 15, 25, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 14px 10px;
-            margin-bottom: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .live-readme-box img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-
-        /* Tombol Utama ala README Kamu (Gaya Tombol Coklat Emas Tonal) */
-        .links { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(227, 171, 32, 0.12);
-            border: 1px solid rgba(227, 171, 32, 0.35);
-            color: var(--accent);
-            text-decoration: none;
-            padding: 14px 16px;
-            border-radius: 16px;
-            font-size: 13.5px;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-        .link-btn:hover {
-            background: var(--accent);
-            color: #080c14;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(227, 171, 32, 0.25);
-        }
-
-        /* Ikon Sosial Media ala Badge Stiker README */
+        /* Ikon Sosial Media (Gaya Badge Stiker) */
         .socials {
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .social-icon {
             width: 44px;
@@ -253,7 +212,7 @@
             color: var(--accent);
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .footer { font-size: 11px; color: var(--text-secondary); }
     </style>
@@ -270,7 +229,7 @@
             <button class="lang-btn" onclick="setLanguage('zh', this)">ZH</button>
         </div>
 
-        <!-- 1. ATAS: PROFIL UTAMA -->
+        <!-- 1. PROFIL UTAMA -->
         <img src="assets/avatar.png" alt="afh21-21" class="avatar" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
         <h1>afh21-21</h1>
         <div class="subtitle">The Craftmanship and The Ownership of<br>©⌬The_Flynner's⌬_</div>
@@ -279,14 +238,13 @@
             <span class="chip">Android Developer</span>
         </div>
 
-        <!-- 2. TENGAH: SALURAN OFFICIAL WHATSAPP (BANNER KOTAK ASSET LOKAL) -->
+        <!-- 2. SALURAN OFFICIAL WHATSAPP (BANNER KOTAK ASSET LOKAL) -->
         <div class="section-label" id="lbl-official">Official Channel</div>
         <a href="https://whatsapp.com/channel/0029Vb8z0o4EquiN4xtNHJ2q" target="_blank" class="wa-preview-card">
             <div class="wa-preview-header">
                 <div class="wa-app-icon">W</div>
                 <div class="wa-app-meta">WhatsApp Business • Channel</div>
             </div>
-            <!-- Menggunakan asset lokal channel-banner.jpg dengan bentuk kotak rapi -->
             <img src="assets/channel-banner.jpg" alt="Saluran Resmi The_Flynner's" class="wa-preview-banner" onerror="this.src='https://avatars.githubusercontent.com/u/afh21-21'">
             <div class="wa-preview-body">
                 <div class="wa-channel-title">
@@ -299,27 +257,7 @@
             </div>
         </a>
 
-        <!-- 3. BAWAH: LIVE EMBED README GITHUB -->
-        <div class="section-label" id="lbl-readme">Live GitHub Profile</div>
-        <div class="live-readme-box">
-            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/about-dark.svg" alt="About Me">
-            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stack-dark.svg" alt="Tech Stack">
-            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/stats-dark.svg" alt="GitHub Activity">
-            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/streak-dark.svg" alt="Streak">
-            <img src="https://raw.githubusercontent.com/afh21-21/afh21-21/main/assets/wave-dark.svg" alt="Wave">
-        </div>
-
-        <!-- TOMBOL UTAMA (GAYA TOMBOL README) -->
-        <div class="links">
-            <a href="https://example.com" target="_blank" class="link-btn" id="btn-linktree">
-                🌐 <span id="txt-btn-linktree">LinkTree</span>
-            </a>
-            <a href="https://github.com/afh21-21?tab=repositories" target="_blank" class="link-btn" id="btn-repos">
-                📖 <span id="txt-btn-repos">All repositories</span>
-            </a>
-        </div>
-
-        <!-- IKON SOSIAL MEDIA (GAYA STIKER README) -->
+        <!-- 3. IKON SOSIAL MEDIA (GAYA BADGE STIKER) -->
         <div class="socials">
             <!-- Telegram -->
             <a href="https://t.me/LeonardoFlynn" target="_blank" class="social-icon" title="Telegram">
@@ -345,42 +283,27 @@
             id: {
                 lblOfficial: "Saluran Resmi",
                 channelName: "Saluran Resmi ©⌬The_Flynner's⌬_",
-                channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD.",
-                lblReadme: "Profil GitHub Langsung",
-                linktree: "LinkTree",
-                repos: "All repositories"
+                channelDesc: "Pembaruan repositori sistem, peningkatan inti, dan ekosistem bot Mr.Wolf & WolfieMD."
             },
             "en-us": {
                 lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
-                lblReadme: "Live GitHub Profile",
-                linktree: "LinkTree",
-                repos: "All repositories"
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem."
             },
             "en-uk": {
                 lblOfficial: "Official Channel",
                 channelName: "The_Flynner's Official Channel",
-                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem.",
-                lblReadme: "Live GitHub Profile",
-                linktree: "LinkTree",
-                repos: "All repositories"
+                channelDesc: "System repository updates, core improvements, and Mr.Wolf & WolfieMD bot ecosystem."
             },
             ru: {
                 lblOfficial: "Официальный канал",
                 channelName: "Официальный канал ©⌬The_Flynner's⌬_",
-                channelDesc: "Обновления системного репозитория, улучшения ядра и экосистема ботов Mr.Wolf & WolfieMD.",
-                lblReadme: "Живой профиль GitHub",
-                linktree: "LinkTree",
-                repos: "All repositories"
+                channelDesc: "Обновления системного репозитория, улучшения ядра и экосистема ботов Mr.Wolf & WolfieMD."
             },
             zh: {
                 lblOfficial: "官方频道",
                 channelName: "©⌬The_Flynner's⌬_ 官方频道",
-                channelDesc: "系统仓库更新、核心改进以及 Mr.Wolf 与 WolfieMD 机器人生态系统。",
-                lblReadme: "GitHub 实时主页",
-                linktree: "LinkTree",
-                repos: "All repositories"
+                channelDesc: "系统仓库更新、核心改进以及 Mr.Wolf 与 WolfieMD 机器人生态系统。"
             }
         };
 
@@ -392,9 +315,6 @@
             document.getElementById('lbl-official').innerText = t.lblOfficial;
             document.getElementById('txt-channel-name').innerText = t.channelName;
             document.getElementById('txt-channel-desc').innerText = t.channelDesc;
-            document.getElementById('lbl-readme').innerText = t.lblReadme;
-            document.getElementById('txt-btn-linktree').innerText = t.linktree;
-            document.getElementById('txt-btn-repos').innerText = t.repos;
             
             document.documentElement.lang = lang;
         }
