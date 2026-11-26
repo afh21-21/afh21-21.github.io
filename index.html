@@ -66,9 +66,9 @@
     </div>
   </header>
 
-  <!-- Main Responsive Split-Grid Container -->
+  <!-- Main Responsive Split-Grid Container (Links di Kiri, GitHub di Kanan) -->
   <main class="split-container">
-    <!-- Left Column: Profile + Live GitHub (Sticky on Desktop) -->
+    <!-- Left Column: Profile Card & Linktree Links -->
     <aside class="profile-column">
       <div class="profile-card">
         <div class="avatar-wrapper">
@@ -86,7 +86,22 @@
         <nav id="social-row" class="social-row" aria-label="Social Links"></nav>
       </div>
 
-      <!-- Live GitHub Profile Cards -->
+      <!-- Links & Channels (Kolom Kiri di Desktop) -->
+      <section class="content-column" style="margin-top: 1.5rem;">
+        <div class="section-header">
+          <h2 id="section-links-title" class="section-title">Links & Channels</h2>
+        </div>
+        <div id="links-container" class="links-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Right Column: Live GitHub Overview (Kolom Kanan di Desktop) -->
+    <section class="github-right-column">
       <div class="github-embed-section">
         <h2 id="section-github-title" class="section-title">Live GitHub Overview</h2>
         <div id="github-cards-grid" class="github-cards-grid">
@@ -100,39 +115,9 @@
             <img id="gh-stats-img" alt="GitHub Activity" loading="lazy">
           </a>
         </div>
-      </div>
-    </aside>
-
-    <!-- Right Column: Linktree Cards -->
-    <section class="content-column">
-      <div class="section-header">
-        <h2 id="section-links-title" class="section-title">Links & Channels</h2>
-      </div>
-
-      <div id="links-container" class="links-grid">
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
-        <div class="skeleton-card"></div>
       </div>
     </section>
   </main>
-
-<!-- Live GitHub Profile Cards Embed (Auto Dark/Light Sync) -->
-      <div class="github-embed-section">
-        <h2 id="section-github-title" class="section-title">Live GitHub Overview</h2>
-        <div id="github-cards-grid" class="github-cards-grid">
-          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
-            <img id="gh-about-img" alt="About Me & My Enthusiast" loading="lazy">
-          </a>
-          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
-            <img id="gh-stack-img" alt="Tech Stack" loading="lazy">
-          </a>
-          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
-            <img id="gh-stats-img" alt="GitHub Activity" loading="lazy">
-          </a>
-        </div>
-      </div>
 
   <!-- Linktree-Style Preview & Click-Guard Modal -->
   <div id="preview-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
@@ -155,7 +140,8 @@
       </div>
     </div>
   </div>
- <!-- QR Code Share Modal -->
+
+  <!-- QR Code Share Modal -->
   <div id="qr-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
     <div class="modal-card">
       <button id="qr-close" class="modal-close-btn bouncy" aria-label="Close">✕</button>
