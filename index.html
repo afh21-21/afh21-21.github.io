@@ -2,7 +2,7 @@
 <html lang="en" data-theme="imperial">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>afh21-21 • ⌬The_Flynner's⌬</title>
   <meta name="description" content="The Craftsmanship & The Ownership — Performance, Stability, Privacy.">
   <link rel="manifest" href="manifest.json">
@@ -68,7 +68,7 @@
 
   <!-- Main Responsive Split-Grid Container -->
   <main class="split-container">
-    <!-- Left Column (Sticky on Desktop) -->
+    <!-- Left Column: Profile + Live GitHub (Sticky on Desktop) -->
     <aside class="profile-column">
       <div class="profile-card">
         <div class="avatar-wrapper">
@@ -83,26 +83,40 @@
         <p id="profile-alias" class="profile-subtitle">⌬The_Flynner's⌬</p>
         <p id="profile-bio" class="profile-bio skeleton-text">Loading profile...</p>
 
-        <!-- Social Icons Row -->
         <nav id="social-row" class="social-row" aria-label="Social Links"></nav>
+      </div>
+
+      <!-- Live GitHub Profile Cards -->
+      <div class="github-embed-section">
+        <h2 id="section-github-title" class="section-title">Live GitHub Overview</h2>
+        <div id="github-cards-grid" class="github-cards-grid">
+          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
+            <img id="gh-about-img" alt="About Me & My Enthusiast" loading="lazy">
+          </a>
+          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
+            <img id="gh-stack-img" alt="Tech Stack" loading="lazy">
+          </a>
+          <a href="https://github.com/afh21-21" target="_blank" rel="noopener noreferrer" class="github-card bouncy">
+            <img id="gh-stats-img" alt="GitHub Activity" loading="lazy">
+          </a>
+        </div>
       </div>
     </aside>
 
-    <!-- Right Column (Links & Live GitHub Widgets) -->
+    <!-- Right Column: Linktree Cards -->
     <section class="content-column">
       <div class="section-header">
         <h2 id="section-links-title" class="section-title">Links & Channels</h2>
-        <!-- Secret Admin Trigger (Double-Click or Ctrl+E) -->
-        <button id="btn-edit-mode" class="edit-trigger" title="Toggle Edit Mode">✎</button>
       </div>
 
-      <!-- Dynamic Link Cards Container (Starts with Skeleton Loaders) -->
       <div id="links-container" class="links-grid">
         <div class="skeleton-card"></div>
         <div class="skeleton-card"></div>
         <div class="skeleton-card"></div>
         <div class="skeleton-card"></div>
       </div>
+    </section>
+  </main>
 
 <!-- Live GitHub Profile Cards Embed (Auto Dark/Light Sync) -->
       <div class="github-embed-section">
@@ -138,6 +152,20 @@
           <span class="btn-label">Continue to Link</span>
           <span class="btn-spinner hidden"></span>
         </a>
+      </div>
+    </div>
+  </div>
+ <!-- QR Code Share Modal -->
+  <div id="qr-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button id="qr-close" class="modal-close-btn bouncy" aria-label="Close">✕</button>
+      <h3 class="modal-title">Scan Profile QR</h3>
+      <p class="modal-subtitle">afh21-21.github.io</p>
+      <div class="modal-url-box" style="display:grid;place-items:center;padding:1rem;background:#ffffff;">
+        <img id="qr-image" src="" alt="QR Code" width="200" height="200">
+      </div>
+      <div class="modal-actions" style="grid-template-columns:1fr;">
+        <button id="qr-copy-url" class="btn-primary bouncy">Copy Profile URL</button>
       </div>
     </div>
   </div>

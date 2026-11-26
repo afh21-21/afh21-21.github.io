@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="imperial">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Editor • afh21-21</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body style="padding:2rem 1rem;max-width:680px;margin:0 auto;">
+  <!-- Lock Screen -->
+  <div id="auth-box" class="profile-card" style="max-width:380px;margin:4rem auto;">
+    <h2 class="profile-title">Admin Access</h2>
+    <p class="profile-bio" style="margin-bottom:1.25rem;">Masukkan PIN/Password untuk membuka editor LinkTree.</p>
+    <input id="admin-pass" type="password" placeholder="Enter Password..." style="width:100%;padding:0.75rem 1rem;border-radius:12px;background:var(--bg-page);border:1px solid var(--border-color);color:var(--text-primary);margin-bottom:0.85rem;">
+    <button id="btn-unlock" class="btn-primary bouncy" style="width:100%;">Unlock Editor</button>
+  </div>
+
+  <!-- Editor Panel (Hidden until unlocked) -->
+  <div id="editor-panel" class="hidden">
+    <div class="section-header" style="margin-bottom:1.5rem;">
+      <h1 class="profile-title">LinkTree Config Editor</h1>
+      <div style="display:flex;gap:0.5rem;">
+        <button id="btn-add-link" class="btn-secondary bouncy">+ Add Link</button>
+        <button id="btn-export-json" class="btn-primary bouncy">Export config.json</button>
+      </div>
+    </div>
+    <div id="admin-links-list" class="links-grid"></div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module">
+    import { showToast } from './js/utils.js';
+
+    // Default hash untuk password: "flynner21" (Ganti dengan hash SHA-256 passwordmu sendiri)
+    const EXPECTED_HASH = "135717cab015d54ed7b78a09a0736dd90cd8f75b342f8f4c52dfb974bf38cb4a";
+    let configData = null;
+
+    async function sha256(text) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.getElementById('btn-unlock').addEventListener('click', async () => {
+      const val = document.getElementById('admin-pass').value;
+      const hash = await sha256(val);
+      if (hash === EXPECTED_HASH) {
+        document.getElementById('auth-box').classList.add('hidden');
+        document.getElementById('editor-panel').classList.remove('hidden');
+        loadConfig();
+      } else {
+        showToast('Password salah!');
+      }
+    });
+
+    async function loadConfig() {
+      const res = await fetch(`data/config.json?v=${Date.now()}`);
+      configData = await res.json();
+      renderAdminList();
+    }
+
+    function renderAdminList() {
+      const list = document.getElementById('admin-links-list');
+      list.innerHTML = configData.links.map((item, idx) => {
+        const meta = configData.i18n['en-US'].items[item.id] || { title: item.id, subtitle: item.url };
+        return `
+          <div class="link-card" style="justify-content:space-between;">
+            <div class="link-info">
+              <div class="link-title">${meta.title}</div>
+              <div class="link-subtitle">${item.url}</div>
+            </div>
+            <div style="display:flex;gap:0.4rem;">
+              <button class="btn-secondary bouncy" data-edit="${idx}">Edit</button>
+              <button class="btn-secondary bouncy" data-del="${idx}" style="color:#f38ba8;">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      list.querySelectorAll('[data-edit]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = Number(btn.dataset.edit);
+          const item = configData.links[i];
+          const newTitle = prompt('Judul baru:', configData.i18n['en-US'].items[item.id]?.title || '');
+          const newUrl = prompt('URL baru:', item.url);
+          if (newTitle && newUrl) {
+            item.url = newUrl;
+            Object.keys(configData.i18n).forEach(lang => {
+              if (configData.i18n[lang].items[item.id]) {
+                configData.i18n[lang].items[item.id].title = newTitle;
+              }
+            });
+            renderAdminList();
+          }
+        });
+      });
+
+      list.querySelectorAll('[data-del]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = Number(btn.dataset.del);
+          const removed = configData.links.splice(i, 1)[0];
+          Object.keys(configData.i18n).forEach(lang => delete configData.i18n[lang].items[removed.id]);
+          renderAdminList();
+        });
+      });
+    }
+
+    document.getElementById('btn-add-link').addEventListener('click', () => {
+      const title = prompt('Judul Link Baru:');
+      const subtitle = prompt('Deskripsi Singkat:');
+      const url = prompt('URL Tujuan (https://...):');
+      const iconSlug = prompt('Nama ikon SimpleIcons (contoh: youtube, instagram, spotify, github):', 'github');
+      if (!title || !url) return;
+
+      const id = 'link-' + Date.now();
+      configData.links.push({
+        id,
+        url,
+        icon: `https://cdn.simpleicons.org/${iconSlug}/e3ab20`,
+        featured: false,
+        category: 'custom'
+      });
+      Object.keys(configData.i18n).forEach(lang => {
+        configData.i18n[lang].items[id] = { title, subtitle: subtitle || url };
+      });
+      renderAdminList();
+    });
+
+    document.getElementById('btn-export-json').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'config.json';
+      a.click();
+      showToast('config.json siap di-push ke folder data/!');
+    });
+  </script>
+</body>
+</html>

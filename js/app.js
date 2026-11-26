@@ -1,6 +1,5 @@
 import { initTheme } from './theme.js';
 import { initI18n } from './i18n.js';
-import { initEditor } from './editor.js';
 import { copyToClipboard, attachImageFallback, triggerClickGuard } from './utils.js';
 
 let appConfig = null;
@@ -26,15 +25,11 @@ async function bootstrap() {
     appConfig = await res.json();
     renderAll();
     setupModalEvents();
-    initEditor(() => appConfig, (updated) => {
-      appConfig = updated;
-      renderAll();
-    });
+    setupQrModal();
   } catch (err) {
     console.error('Gagal memuat config.json:', err);
   }
 }
-
 function renderAll() {
   if (!appConfig) return;
   const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
@@ -130,6 +125,30 @@ function openPreviewModal(linkId) {
   document.getElementById('modal-open-btn').href = linkObj.url;
 
   document.getElementById('preview-modal').classList.remove('hidden');
+}
+
+function setupQrModal() {
+  const btnQr = document.getElementById('btn-qr');
+  const qrModal = document.getElementById('qr-modal');
+  const qrClose = document.getElementById('qr-close');
+  const qrImg = document.getElementById('qr-image');
+  const qrCopy = document.getElementById('qr-copy-url');
+
+  btnQr?.addEventListener('click', () => {
+    const profileUrl = window.location.origin + window.location.pathname;
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=${encodeURIComponent(profileUrl)}`;
+    qrModal.classList.remove('hidden');
+  });
+
+  qrClose?.addEventListener('click', () => qrModal.classList.add('hidden'));
+  qrModal?.addEventListener('click', (e) => {
+    if (e.target === qrModal) qrModal.classList.add('hidden');
+  });
+
+  qrCopy?.addEventListener('click', () => {
+    const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
+    copyToClipboard(window.location.href, dict.copiedToast);
+  });
 }
 
 function setupModalEvents() {
