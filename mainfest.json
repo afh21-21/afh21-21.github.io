@@ -1,0 +1,15 @@
+{
+  "name": "afh21-21 • ⌬The_Flynner's⌬",
+  "short_name": "The_Flynner's",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#080c14",
+  "theme_color": "#e3ab20",
+  "icons": [
+    {
+      "src": "https://github.com/afh21-21.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

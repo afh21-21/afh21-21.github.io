@@ -1,0 +1,138 @@
+import { initTheme } from './theme.js';
+import { initI18n } from './i18n.js';
+import { initEditor } from './editor.js';
+import { copyToClipboard, attachImageFallback, triggerClickGuard } from './utils.js';
+
+let appConfig = null;
+let currentLang = 'en-US';
+let selectedLink = null;
+
+async function bootstrap() {
+  initTheme();
+  currentLang = initI18n((newLang) => {
+    currentLang = newLang;
+    renderAll();
+  });
+
+  try {
+    const res = await fetch(`data/config.json?v=${Date.now()}`);
+    appConfig = await res.json();
+    renderAll();
+    setupModalEvents();
+    initEditor(() => appConfig, (updated) => {
+      appConfig = updated;
+      renderAll();
+    });
+  } catch (err) {
+    console.error('Gagal memuat config.json:', err);
+  }
+}
+
+function renderAll() {
+  if (!appConfig) return;
+  const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
+
+  // Profile Info
+  const avatar = document.getElementById('profile-avatar');
+  avatar.src = appConfig.profile.avatar;
+  attachImageFallback(avatar, appConfig.profile.fallbackAvatar);
+
+  document.getElementById('profile-name').textContent = appConfig.profile.name;
+  document.getElementById('profile-alias').textContent = appConfig.profile.alias;
+  document.getElementById('profile-bio').textContent = dict.bio;
+  document.getElementById('profile-bio').classList.remove('skeleton-text');
+
+  document.getElementById('status-emoji').textContent = appConfig.profile.status.emoji;
+  document.getElementById('status-text').textContent = dict.statusText;
+  document.getElementById('status-text').classList.remove('skeleton-text');
+
+  document.getElementById('section-links-title').textContent = dict.sectionLinks;
+  document.getElementById('section-github-title').textContent = dict.sectionGithub;
+
+  // Social Icons
+  const socialRow = document.getElementById('social-row');
+  socialRow.innerHTML = appConfig.socials.map((s) => `
+    <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="social-btn bouncy" title="${s.label}" aria-label="${s.label}">
+      <img src="${s.icon}" alt="${s.label}" width="20" height="20">
+    </a>
+  `).join('');
+
+  // Linktree Cards
+  const linksContainer = document.getElementById('links-container');
+  linksContainer.innerHTML = appConfig.links.map((item) => {
+    const meta = dict.items[item.id] || { title: item.id, subtitle: item.url };
+    return `
+      <div class="link-card bouncy ${item.featured ? 'featured' : ''}" data-link-id="${item.id}">
+        <div class="link-icon">
+          <img src="${item.icon}" alt="" width="22" height="22">
+        </div>
+        <div class="link-info">
+          <div class="link-title">${meta.title}</div>
+          <div class="link-subtitle">${meta.subtitle}</div>
+        </div>
+        <button class="link-more-btn bouncy" data-preview-id="${item.id}" aria-label="Preview Link">•••</button>
+      </div>
+    `;
+  }).join('');
+
+  // Klik Kartu atau Tombol ••• untuk Pratinjau dengan Click Guard
+  linksContainer.querySelectorAll('.link-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const id = card.dataset.linkId;
+      triggerClickGuard(card, 220, () => openPreviewModal(id));
+    });
+  });
+
+  // Live GitHub SVG (Anti-cache harian)
+  const today = new Date().toISOString().slice(0, 10);
+  const ghImg = document.getElementById('github-stats-img');
+  ghImg.src = `https://raw.githubusercontent.com/${appConfig.profile.githubUsername}/${appConfig.profile.githubUsername}/main/assets/activity.svg?d=${today}`;
+}
+
+function openPreviewModal(linkId) {
+  const linkObj = appConfig.links.find((l) => l.id === linkId);
+  if (!linkObj) return;
+  selectedLink = linkObj;
+
+  const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
+  const meta = dict.items[linkId] || { title: linkId, subtitle: linkObj.url };
+
+  document.getElementById('modal-icon').src = linkObj.icon;
+  document.getElementById('modal-title').textContent = meta.title;
+  document.getElementById('modal-subtitle').textContent = meta.subtitle;
+  document.getElementById('modal-url').textContent = linkObj.url;
+  document.getElementById('modal-copy-btn').textContent = dict.previewCopy;
+  document.querySelector('#modal-open-btn .btn-label').textContent = dict.previewOpen;
+  document.getElementById('modal-open-btn').href = linkObj.url;
+
+  document.getElementById('preview-modal').classList.remove('hidden');
+}
+
+function setupModalEvents() {
+  const modal = document.getElementById('preview-modal');
+  const closeBtn = document.getElementById('modal-close');
+  const copyBtn = document.getElementById('modal-copy-btn');
+  const openBtn = document.getElementById('modal-open-btn');
+
+  closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.add('hidden');
+  });
+
+  copyBtn?.addEventListener('click', () => {
+    if (!selectedLink) return;
+    const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
+    copyToClipboard(selectedLink.url, dict.copiedToast);
+  });
+
+  openBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!selectedLink) return;
+    triggerClickGuard(openBtn, 350, () => {
+      window.open(selectedLink.url, '_blank', 'noopener,noreferrer');
+      modal.classList.add('hidden');
+    });
+  });
+}
+
+bootstrap();

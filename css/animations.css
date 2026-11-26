@@ -1,0 +1,51 @@
+/* Bouncy Spring Physics pada Tombol & Kartu */
+.bouncy {
+  transition: transform 0.38s var(--spring-curve), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.bouncy:hover {
+  transform: translateY(-2px) scale(1.015);
+}
+
+.bouncy:active {
+  transform: scale(0.95);
+  transition-duration: 0.1s;
+}
+
+/* Skeleton Loader Shimmer saat jaringan lambat */
+.skeleton-card {
+  height: 70px;
+  border-radius: var(--radius-btn);
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface) 25%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Click Guard / Loading Spinner State */
+.is-loading {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.btn-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,84 @@
+:root {
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  --spring-curve: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 1. IMPERIAL DARK (Default — Hitam Pekat + Emas Mewah) */
+[data-theme="imperial"] {
+  --bg-page: #080c14;
+  --bg-gradient: radial-gradient(circle at top right, rgba(227, 171, 32, 0.08), transparent 45%);
+  --bg-surface: #111622;
+  --bg-surface-hover: #171e2e;
+  --bg-elevated: #1c2436;
+  --text-primary: #f4f6fa;
+  --text-secondary: #9aa4b8;
+  --accent: #e3ab20;
+  --accent-soft: rgba(227, 171, 32, 0.14);
+  --accent-contrast: #080c14;
+  --border-color: rgba(227, 171, 32, 0.25);
+  --border-width: 1px;
+  --radius-card: 20px;
+  --radius-btn: 14px;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --backdrop-blur: none;
+}
+
+/* 2. MATERIAL YOU (Android 14+ — Sudut Pil Ekstra Membulat & Tonal Surface) */
+[data-theme="material"] {
+  --bg-page: #131318;
+  --bg-gradient: none;
+  --bg-surface: #1f1f26;
+  --bg-surface-hover: #2a2933;
+  --bg-elevated: #353440;
+  --text-primary: #e5e1e9;
+  --text-secondary: #c8c5d0;
+  --accent: #c5c0ff;
+  --accent-soft: #433e77;
+  --accent-contrast: #2c275f;
+  --border-color: transparent;
+  --border-width: 0px;
+  --radius-card: 28px;
+  --radius-btn: 999px;
+  --shadow-card: none;
+  --backdrop-blur: none;
+}
+
+/* 3. CATPPUCCIN MOCHA (Developer VS Code Vibe — Pastel Mauve & Outline Tegas) */
+[data-theme="catppuccin"] {
+  --bg-page: #1e1e2e;
+  --bg-gradient: none;
+  --bg-surface: #313244;
+  --bg-surface-hover: #45475a;
+  --bg-elevated: #181825;
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --accent: #cba6f7;
+  --accent-soft: rgba(203, 166, 247, 0.16);
+  --accent-contrast: #11111b;
+  --border-color: #585b70;
+  --border-width: 1.5px;
+  --radius-card: 12px;
+  --radius-btn: 10px;
+  --shadow-card: 4px 4px 0px #11111b;
+  --backdrop-blur: none;
+}
+
+/* 4. APPLE ELEGANT (macOS/iOS Light Frosted Glass) */
+[data-theme="apple"] {
+  --bg-page: #f5f5f7;
+  --bg-gradient: radial-gradient(circle at top left, #ffffff, #e8e8ed);
+  --bg-surface: rgba(255, 255, 255, 0.78);
+  --bg-surface-hover: rgba(255, 255, 255, 0.95);
+  --bg-elevated: rgba(255, 255, 255, 0.92);
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --accent: #0071e3;
+  --accent-soft: rgba(0, 113, 227, 0.1);
+  --accent-contrast: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-width: 1px;
+  --radius-card: 22px;
+  --radius-btn: 14px;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --backdrop-blur: blur(20px);
+}
