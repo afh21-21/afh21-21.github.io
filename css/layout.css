@@ -9,33 +9,26 @@
   gap: 0.45rem;
 }
 
-/* Container Utama (Mode Mobile / HP: 1 Kolom Vertikal) */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .split-container {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 4.25rem 1rem 3rem;
+  padding: 4.25rem 0.9rem 3rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr); /* Kunci anti-jebol di CSS Grid */
   gap: 1.5rem;
 }
 
-.profile-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.content-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
+.profile-column,
+.content-column,
 .github-right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  min-width: 0;
+  width: 100%;
 }
 
 /* Desktop Split-Grid Menyamping (≥ 900px) */
