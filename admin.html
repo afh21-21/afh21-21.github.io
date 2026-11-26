@@ -2,41 +2,61 @@
 <html lang="en" data-theme="imperial">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Editor • afh21-21</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Admin Dashboard • afh21-21</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
 </head>
-<body style="padding:2rem 1rem;max-width:680px;margin:0 auto;">
+<body style="padding: 2rem 1rem; max-width: 720px; margin: 0 auto;">
+  
   <!-- Lock Screen -->
-  <div id="auth-box" class="profile-card" style="max-width:380px;margin:4rem auto;">
+  <div id="auth-box" class="profile-card" style="max-width: 380px; margin: 4rem auto;">
     <h2 class="profile-title">Admin Access</h2>
-    <p class="profile-bio" style="margin-bottom:1.25rem;">Masukkan PIN/Password untuk membuka editor LinkTree.</p>
-    <input id="admin-pass" type="password" placeholder="Enter Password..." style="width:100%;padding:0.75rem 1rem;border-radius:12px;background:var(--bg-page);border:1px solid var(--border-color);color:var(--text-primary);margin-bottom:0.85rem;">
-    <button id="btn-unlock" class="btn-primary bouncy" style="width:100%;">Unlock Editor</button>
+    <p class="profile-bio" style="margin-bottom: 1.25rem;">Masukkan password rahasia untuk masuk ke LinkTree Dashboard.</p>
+    <input id="admin-pass" type="password" placeholder="Enter Password..." style="width: 100%; padding: 0.75rem 1rem; border-radius: 12px; background: var(--bg-page); border: 1px solid var(--border-color); color: var(--text-primary); margin-bottom: 0.85rem;">
+    <button id="btn-unlock" class="btn-primary bouncy" style="width: 100%;">Unlock Dashboard</button>
   </div>
 
-  <!-- Editor Panel (Hidden until unlocked) -->
+  <!-- Editor Dashboard Panel (Hidden until unlocked) -->
   <div id="editor-panel" class="hidden">
-    <div class="section-header" style="margin-bottom:1.5rem;">
-      <h1 class="profile-title">LinkTree Config Editor</h1>
-      <div style="display:flex;gap:0.5rem;">
-        <button id="btn-add-link" class="btn-secondary bouncy">+ Add Link</button>
-        <button id="btn-export-json" class="btn-primary bouncy">Export config.json</button>
+    <div class="section-header" style="margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <h1 class="profile-title" style="font-size: 1.25rem;">LinkTree Manager</h1>
+        <p class="profile-subtitle" id="save-status">Status: All changes synced</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <!-- Theme Switcher di Admin -->
+        <select id="admin-theme-select" class="btn-secondary" style="padding: 0.5rem; border-radius: var(--radius-btn);">
+          <option value="imperial">Imperial Dark</option>
+          <option value="material">Material You</option>
+          <option value="catppuccin">Catppuccin</option>
+          <option value="apple">Apple Elegant</option>
+        </select>
+        <button id="btn-logout" class="btn-secondary bouncy" style="color: #f38ba8;">Logout</button>
       </div>
     </div>
+
+    <!-- Aksi Utama -->
+    <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+      <button id="btn-add-link" class="btn-secondary bouncy" style="flex: 1;">+ Add New Link</button>
+      <button id="btn-save-changes" class="btn-primary bouncy" style="flex: 1;">💾 Save & Export config.json</button>
+    </div>
+
+    <!-- Daftar Link Interaktif (Reorder & Edit) -->
     <div id="admin-links-list" class="links-grid"></div>
   </div>
 
+  <!-- Toast Notification -->
   <div id="toast" class="toast hidden"></div>
 
   <script type="module">
     import { showToast } from './js/utils.js';
+    import { applyTheme } from './js/theme.js';
 
-    // Default hash untuk password: "flynner21" (Ganti dengan hash SHA-256 passwordmu sendiri)
-    const EXPECTED_HASH = "135717cab015d54ed7b78a09a0736dd90cd8f75b342f8f4c52dfb974bf38cb4a";
+    // Ganti string di bawah ini dengan hash SHA-256 passwordmu!
+    const EXPECTED_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
     let configData = null;
 
     async function sha256(text) {
@@ -44,22 +64,48 @@
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
+    // Cek Sesi Login Sebelumnya di SessionStorage
+    if (sessionStorage.getItem('admin_logged_in') === 'true') {
+      unlockDashboard();
+    }
+
     document.getElementById('btn-unlock').addEventListener('click', async () => {
       const val = document.getElementById('admin-pass').value;
       const hash = await sha256(val);
       if (hash === EXPECTED_HASH) {
-        document.getElementById('auth-box').classList.add('hidden');
-        document.getElementById('editor-panel').classList.remove('hidden');
-        loadConfig();
+        sessionStorage.setItem('admin_logged_in', 'true');
+        unlockDashboard();
       } else {
         showToast('Password salah!');
       }
     });
 
+    function unlockDashboard() {
+      document.getElementById('auth-box').classList.add('hidden');
+      document.getElementById('editor-panel').classList.remove('hidden');
+      loadConfig();
+    }
+
+    // Logout Handler
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      sessionStorage.removeItem('admin_logged_in');
+      location.reload();
+    });
+
+    // Theme Switcher di Admin
+    const themeSelect = document.getElementById('admin-theme-select');
+    themeSelect.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
+
     async function loadConfig() {
-      const res = await fetch(`data/config.json?v=${Date.now()}`);
-      configData = await res.json();
-      renderAdminList();
+      try {
+        const res = await fetch(`data/config.json?v=${Date.now()}`);
+        configData = await res.json();
+        renderAdminList();
+      } catch (err) {
+        showToast('Gagal memuat config.json');
+      }
     }
 
     function renderAdminList() {
@@ -67,30 +113,66 @@
       list.innerHTML = configData.links.map((item, idx) => {
         const meta = configData.i18n['en-US'].items[item.id] || { title: item.id, subtitle: item.url };
         return `
-          <div class="link-card" style="justify-content:space-between;">
-            <div class="link-info">
+          <div class="link-card" style="justify-content: space-between; align-items: center; gap: 0.5rem;">
+            <div class="link-info" style="min-width: 0; flex: 1;">
               <div class="link-title">${meta.title}</div>
               <div class="link-subtitle">${item.url}</div>
             </div>
-            <div style="display:flex;gap:0.4rem;">
-              <button class="btn-secondary bouncy" data-edit="${idx}">Edit</button>
-              <button class="btn-secondary bouncy" data-del="${idx}" style="color:#f38ba8;">✕</button>
+            <div style="display: flex; gap: 0.35rem; flex-shrink: 0;">
+              <button class="icon-btn bouncy" data-up="${idx}" title="Geser ke Atas" ${idx === 0 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬆</button>
+              <button class="icon-btn bouncy" data-down="${idx}" title="Geser ke Bawah" ${idx === configData.links.length - 1 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬇</button>
+              <button class="btn-secondary bouncy" data-edit="${idx}" style="padding: 0.4rem 0.7rem; font-size: 0.78rem;">Edit</button>
+              <button class="btn-secondary bouncy" data-del="${idx}" style="color: #f38ba8; padding: 0.4rem 0.6rem; font-size: 0.78rem;">✕</button>
             </div>
           </div>
         `;
       }).join('');
 
+      markUnsaved();
+
+      // Tombol Geser Atas (Reorder Up)
+      list.querySelectorAll('[data-up]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = Number(btn.dataset.up);
+          if (i > 0) {
+            const temp = configData.links[i];
+            configData.links[i] = configData.links[i - 1];
+            configData.links[i - 1] = temp;
+            renderAdminList();
+          }
+        });
+      });
+
+      // Tombol Geser Bawah (Reorder Down)
+      list.querySelectorAll('[data-down]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = Number(btn.dataset.down);
+          if (i < configData.links.length - 1) {
+            const temp = configData.links[i];
+            configData.links[i] = configData.links[i + 1];
+            configData.links[i + 1] = temp;
+            renderAdminList();
+          }
+        });
+      });
+
+      // Tombol Edit Link
       list.querySelectorAll('[data-edit]').forEach(btn => {
         btn.addEventListener('click', () => {
           const i = Number(btn.dataset.edit);
           const item = configData.links[i];
-          const newTitle = prompt('Judul baru:', configData.i18n['en-US'].items[item.id]?.title || '');
-          const newUrl = prompt('URL baru:', item.url);
-          if (newTitle && newUrl) {
+          const currentMeta = configData.i18n['en-US'].items[item.id] || { title: '', subtitle: '' };
+          
+          const newTitle = prompt('Judul Link:', currentMeta.title);
+          const newSub = prompt('Subjudul / Deskripsi:', currentMeta.subtitle);
+          const newUrl = prompt('URL Tujuan (https://...):', item.url);
+
+          if (newTitle !== null && newUrl !== null) {
             item.url = newUrl;
             Object.keys(configData.i18n).forEach(lang => {
               if (configData.i18n[lang].items[item.id]) {
                 configData.i18n[lang].items[item.id].title = newTitle;
+                configData.i18n[lang].items[item.id].subtitle = newSub || newUrl;
               }
             });
             renderAdminList();
@@ -98,21 +180,26 @@
         });
       });
 
+      // Tombol Hapus Link
       list.querySelectorAll('[data-del]').forEach(btn => {
         btn.addEventListener('click', () => {
           const i = Number(btn.dataset.del);
-          const removed = configData.links.splice(i, 1)[0];
-          Object.keys(configData.i18n).forEach(lang => delete configData.i18n[lang].items[removed.id]);
-          renderAdminList();
+          if (confirm('Yakin ingin menghapus tautan ini?')) {
+            const removed = configData.links.splice(i, 1)[0];
+            Object.keys(configData.i18n).forEach(lang => delete configData.i18n[lang].items[removed.id]);
+            renderAdminList();
+          }
         });
       });
     }
 
+    // Tambah Link Baru
     document.getElementById('btn-add-link').addEventListener('click', () => {
-      const title = prompt('Judul Link Baru:');
+      const title = prompt('Judul Tautan Baru:');
       const subtitle = prompt('Deskripsi Singkat:');
       const url = prompt('URL Tujuan (https://...):');
-      const iconSlug = prompt('Nama ikon SimpleIcons (contoh: youtube, instagram, spotify, github):', 'github');
+      const iconSlug = prompt('Nama ikon SimpleIcons (contoh: youtube, spotify, instagram, discord):', 'globe');
+
       if (!title || !url) return;
 
       const id = 'link-' + Date.now();
@@ -123,19 +210,32 @@
         featured: false,
         category: 'custom'
       });
+
       Object.keys(configData.i18n).forEach(lang => {
         configData.i18n[lang].items[id] = { title, subtitle: subtitle || url };
       });
+
       renderAdminList();
     });
 
-    document.getElementById('btn-export-json').addEventListener('click', () => {
+    function markUnsaved() {
+      const status = document.getElementById('save-status');
+      status.textContent = 'Status: Unsaved changes (Click Save & Export)';
+      status.style.color = '#e3ab20';
+    }
+
+    // Tombol Save & Export config.json
+    document.getElementById('btn-save-changes').addEventListener('click', () => {
       const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = 'config.json';
       a.click();
-      showToast('config.json siap di-push ke folder data/!');
+
+      const status = document.getElementById('save-status');
+      status.textContent = 'Status: All changes saved & exported!';
+      status.style.color = '#a6e3a1';
+      showToast('config.json berhasil diunduh! Silakan update ke folder data/');
     });
   </script>
 </body>
