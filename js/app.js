@@ -14,6 +14,13 @@ async function bootstrap() {
     renderAll();
   });
 
+  // Otomatis ganti SVG GitHub (-dark / -light) saat atribut data-theme berubah
+  const themeObserver = new MutationObserver(() => syncGithubCards());
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  });
+
   try {
     const res = await fetch(`data/config.json?v=${Date.now()}`);
     appConfig = await res.json();
@@ -75,18 +82,35 @@ function renderAll() {
     `;
   }).join('');
 
-  // Klik Kartu atau Tombol ••• untuk Pratinjau dengan Click Guard
   linksContainer.querySelectorAll('.link-card').forEach((card) => {
-    card.addEventListener('click', (e) => {
+    card.addEventListener('click', () => {
       const id = card.dataset.linkId;
       triggerClickGuard(card, 220, () => openPreviewModal(id));
     });
   });
 
-  // Live GitHub SVG (Anti-cache harian)
+  // Render Live GitHub SVG Cards
+  syncGithubCards();
+}
+
+function syncGithubCards() {
+  if (!appConfig) return;
+  const user = appConfig.profile.githubUsername;
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'imperial';
+  const variant = currentTheme === 'apple' ? 'light' : 'dark';
   const today = new Date().toISOString().slice(0, 10);
-  const ghImg = document.getElementById('github-stats-img');
-  ghImg.src = `https://raw.githubusercontent.com/${appConfig.profile.githubUsername}/${appConfig.profile.githubUsername}/main/assets/activity.svg?d=${today}`;
+  const base = `https://raw.githubusercontent.com/${user}/${user}/main/assets`;
+
+  const targets = [
+    { id: 'gh-about-img', file: `about-${variant}.svg` },
+    { id: 'gh-stack-img', file: `stack-${variant}.svg` },
+    { id: 'gh-stats-img', file: `stats-${variant}.svg` }
+  ];
+
+  targets.forEach(({ id, file }) => {
+    const img = document.getElementById(id);
+    if (img) img.src = `${base}/${file}?d=${today}`;
+  });
 }
 
 function openPreviewModal(linkId) {

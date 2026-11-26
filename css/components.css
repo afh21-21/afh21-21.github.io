@@ -222,13 +222,26 @@
 }
 
 /* GitHub Card */
+.github-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .github-card {
   display: block;
   background: var(--bg-surface);
   border: var(--border-width) solid var(--border-color);
   border-radius: var(--radius-card);
-  padding: 1rem;
+  padding: 0.65rem;
   box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.github-card img {
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius-card) - 6px);
 }
 
 /* Modal Preview */
