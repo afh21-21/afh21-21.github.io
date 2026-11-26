@@ -64,7 +64,7 @@
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // Cek Sesi Login Sebelumnya di SessionStorage
+   // Cek Sesi Login Sebelumnya di SessionStorage
     if (sessionStorage.getItem('admin_logged_in') === 'true') {
       unlockDashboard();
     }
@@ -76,7 +76,7 @@
         sessionStorage.setItem('admin_logged_in', 'true');
         unlockDashboard();
       } else {
-        showToast('Password salah!');
+        showToast('Incorrect password!'); // Diubah ke English
       }
     });
 
@@ -104,7 +104,7 @@
         configData = await res.json();
         renderAdminList();
       } catch (err) {
-        showToast('Gagal memuat config.json');
+        showToast('Failed to load config.json'); // Diubah ke English
       }
     }
 
@@ -119,8 +119,8 @@
               <div class="link-subtitle">${item.url}</div>
             </div>
             <div style="display: flex; gap: 0.35rem; flex-shrink: 0;">
-              <button class="icon-btn bouncy" data-up="${idx}" title="Geser ke Atas" ${idx === 0 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬆</button>
-              <button class="icon-btn bouncy" data-down="${idx}" title="Geser ke Bawah" ${idx === configData.links.length - 1 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬇</button>
+              <button class="icon-btn bouncy" data-up="${idx}" title="Move Up" ${idx === 0 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬆</button>
+              <button class="icon-btn bouncy" data-down="${idx}" title="Move Down" ${idx === configData.links.length - 1 ? 'style="opacity:0.4;pointer-events:none;"' : ''}>⬇</button>
               <button class="btn-secondary bouncy" data-edit="${idx}" style="padding: 0.4rem 0.7rem; font-size: 0.78rem;">Edit</button>
               <button class="btn-secondary bouncy" data-del="${idx}" style="color: #f38ba8; padding: 0.4rem 0.6rem; font-size: 0.78rem;">✕</button>
             </div>
@@ -163,9 +163,9 @@
           const item = configData.links[i];
           const currentMeta = configData.i18n['en-US'].items[item.id] || { title: '', subtitle: '' };
           
-          const newTitle = prompt('Judul Link:', currentMeta.title);
-          const newSub = prompt('Subjudul / Deskripsi:', currentMeta.subtitle);
-          const newUrl = prompt('URL Tujuan (https://...):', item.url);
+          const newTitle = prompt('Link Title:', currentMeta.title);
+          const newSub = prompt('Subtitle / Description:', currentMeta.subtitle);
+          const newUrl = prompt('Target URL (https://...):', item.url);
 
           if (newTitle !== null && newUrl !== null) {
             item.url = newUrl;
@@ -184,7 +184,7 @@
       list.querySelectorAll('[data-del]').forEach(btn => {
         btn.addEventListener('click', () => {
           const i = Number(btn.dataset.del);
-          if (confirm('Yakin ingin menghapus tautan ini?')) {
+          if (confirm('Are you sure you want to delete this link?')) {
             const removed = configData.links.splice(i, 1)[0];
             Object.keys(configData.i18n).forEach(lang => delete configData.i18n[lang].items[removed.id]);
             renderAdminList();
@@ -195,10 +195,10 @@
 
     // Tambah Link Baru
     document.getElementById('btn-add-link').addEventListener('click', () => {
-      const title = prompt('Judul Tautan Baru:');
-      const subtitle = prompt('Deskripsi Singkat:');
-      const url = prompt('URL Tujuan (https://...):');
-      const iconSlug = prompt('Nama ikon SimpleIcons (contoh: youtube, spotify, instagram, discord):', 'globe');
+      const title = prompt('New Link Title:');
+      const subtitle = prompt('Short Description:');
+      const url = prompt('Target URL (https://...):');
+      const iconSlug = prompt('SimpleIcons slug (e.g., youtube, spotify, instagram, discord):', 'globe');
 
       if (!title || !url) return;
 
@@ -235,7 +235,7 @@
       const status = document.getElementById('save-status');
       status.textContent = 'Status: All changes saved & exported!';
       status.style.color = '#a6e3a1';
-      showToast('config.json berhasil diunduh! Silakan update ke folder data/');
+      showToast('config.json downloaded! Please update it to the data/ folder'); // Diubah ke English
     });
   </script>
 </body>
