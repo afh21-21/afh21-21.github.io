@@ -1,0 +1,260 @@
+{
+  "profile": {
+    "name": "afh21-21",
+    "alias": "⌬The_Flynner's⌬",
+    "avatar": "https://github.com/afh21-21.png",
+    "fallbackAvatar": "https://github.com/afh21-21.png",
+    "githubUsername": "afh21-21",
+    "status": {
+      "emoji": "⚡",
+      "active": true
+    }
+  },
+  "socials": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/afh21-21",
+      "icon": "https://cdn.simpleicons.org/github/e3ab20"
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram",
+      "url": "https://t.me/LeonardoFlynn",
+      "icon": "https://cdn.simpleicons.org/telegram/e3ab20"
+    },
+    {
+      "id": "discord",
+      "label": "Discord",
+      "url": "https://discord.com/users/1352214863895728128",
+      "icon": "https://cdn.simpleicons.org/discord/e3ab20"
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@leonardo.flynn",
+      "icon": "https://cdn.simpleicons.org/tiktok/e3ab20"
+    }
+  ],
+  "links": [
+    {
+      "id": "wa-channel",
+      "url": "https://whatsapp.com/channel/0029Vb8z0o4EquiN4xtNHJ2q",
+      "icon": "https://cdn.simpleicons.org/whatsapp/e3ab20",
+      "featured": true,
+      "category": "community"
+    },
+    {
+      "id": "github-main",
+      "url": "https://github.com/afh21-21",
+      "icon": "https://cdn.simpleicons.org/github/e3ab20",
+      "featured": false,
+      "category": "dev"
+    },
+    {
+      "id": "tiktok-updates",
+      "url": "https://www.tiktok.com/@leonardo.flynn",
+      "icon": "https://cdn.simpleicons.org/tiktok/e3ab20",
+      "featured": false,
+      "category": "social"
+    },
+    {
+      "id": "telegram-dm",
+      "url": "https://t.me/LeonardoFlynn",
+      "icon": "https://cdn.simpleicons.org/telegram/e3ab20",
+      "featured": false,
+      "category": "social"
+    },
+    {
+      "id": "discord-profile",
+      "url": "https://discord.com/users/1352214863895728128",
+      "icon": "https://cdn.simpleicons.org/discord/e3ab20",
+      "featured": false,
+      "category": "social"
+    },
+    {
+      "id": "roblox-profile",
+      "url": "https://www.roblox.com/users/profile?username=olsen_023",
+      "icon": "https://cdn.simpleicons.org/roblox/e3ab20",
+      "featured": false,
+      "category": "gaming"
+    }
+  ],
+  "i18n": {
+    "en-US": {
+      "bio": "The Craftsmanship & The Ownership • Performance, Stability, Privacy.",
+      "statusText": "Crafting WolfieMD & Systems",
+      "sectionLinks": "Links & Channels",
+      "sectionGithub": "Live GitHub Overview",
+      "previewCopy": "Copy Link",
+      "previewOpen": "Continue to Link",
+      "copiedToast": "Link copied to clipboard!",
+      "items": {
+        "wa-channel": {
+          "title": "⌬The_Flynner's⌬ Official Channel",
+          "subtitle": "WhatsApp Updates, Releases & Announcements"
+        },
+        "github-main": {
+          "title": "GitHub Repositories",
+          "subtitle": "Explore open-source bots, scripts & configs"
+        },
+        "tiktok-updates": {
+          "title": "TikTok (@leonardo.flynn)",
+          "subtitle": "Short dev logs, setups & system showcases"
+        },
+        "telegram-dm": {
+          "title": "Telegram (@LeonardoFlynn)",
+          "subtitle": "Direct messages & fast technical discussions"
+        },
+        "discord-profile": {
+          "title": "Discord Profile",
+          "subtitle": "Connect on Discord (ID: 1352214863895728128)"
+        },
+        "roblox-profile": {
+          "title": "Roblox (olsen_023)",
+          "subtitle": "Gaming profile & in-game hangouts"
+        }
+      }
+    },
+    "en-UK": {
+      "bio": "The Craftsmanship & The Ownership • Performance, Stability, Privacy.",
+      "statusText": "Crafting WolfieMD & Systems",
+      "sectionLinks": "Links & Channels",
+      "sectionGithub": "Live GitHub Overview",
+      "previewCopy": "Copy Link",
+      "previewOpen": "Continue to Link",
+      "copiedToast": "Link copied to clipboard!",
+      "items": {
+        "wa-channel": {
+          "title": "⌬The_Flynner's⌬ Official Channel",
+          "subtitle": "WhatsApp Updates, Releases & Announcements"
+        },
+        "github-main": {
+          "title": "GitHub Repositories",
+          "subtitle": "Explore open-source bots, scripts & configs"
+        },
+        "tiktok-updates": {
+          "title": "TikTok (@leonardo.flynn)",
+          "subtitle": "Short dev logs, setups & system showcases"
+        },
+        "telegram-dm": {
+          "title": "Telegram (@LeonardoFlynn)",
+          "subtitle": "Direct messages & prompt discussions"
+        },
+        "discord-profile": {
+          "title": "Discord Profile",
+          "subtitle": "Connect on Discord (ID: 1352214863895728128)"
+        },
+        "roblox-profile": {
+          "title": "Roblox (olsen_023)",
+          "subtitle": "Gaming profile & sessions"
+        }
+      }
+    },
+    "id": {
+      "bio": "The Craftsmanship & The Ownership • Performa, Stabilitas, Privasi.",
+      "statusText": "Merakit WolfieMD & Sistem",
+      "sectionLinks": "Tautan & Saluran",
+      "sectionGithub": "Ringkasan GitHub Langsung",
+      "previewCopy": "Salin Tautan",
+      "previewOpen": "Lanjut ke Tautan",
+      "copiedToast": "Tautan berhasil disalin!",
+      "items": {
+        "wa-channel": {
+          "title": "Saluran Resmi ⌬The_Flynner's⌬",
+          "subtitle": "Pembaruan WhatsApp, Rilis & Pengumuman"
+        },
+        "github-main": {
+          "title": "Repositori GitHub",
+          "subtitle": "Jelajahi bot open-source, skrip & konfigurasi"
+        },
+        "tiktok-updates": {
+          "title": "TikTok (@leonardo.flynn)",
+          "subtitle": "Log pengembangan singkat, setup & pameran sistem"
+        },
+        "telegram-dm": {
+          "title": "Telegram (@LeonardoFlynn)",
+          "subtitle": "Pesan langsung & diskusi teknis cepat"
+        },
+        "discord-profile": {
+          "title": "Profil Discord",
+          "subtitle": "Terhubung di Discord (ID: 1352214863895728128)"
+        },
+        "roblox-profile": {
+          "title": "Roblox (olsen_023)",
+          "subtitle": "Profil bermain & mabar"
+        }
+      }
+    },
+    "ru": {
+      "bio": "Мастерство и Владение • Производительность, Стабильность, Приватность.",
+      "statusText": "Разработка WolfieMD и систем",
+      "sectionLinks": "Ссылки и Каналы",
+      "sectionGithub": "Обзор GitHub",
+      "previewCopy": "Копировать",
+      "previewOpen": "Перейти по ссылке",
+      "copiedToast": "Ссылка скопирована!",
+      "items": {
+        "wa-channel": {
+          "title": "Официальный канал ⌬The_Flynner's⌬",
+          "subtitle": "Обновления WhatsApp, релизы и анонсы"
+        },
+        "github-main": {
+          "title": "Репозитории GitHub",
+          "subtitle": "Боты с открытым исходным кодом, скрипты и конфиги"
+        },
+        "tiktok-updates": {
+          "title": "TikTok (@leonardo.flynn)",
+          "subtitle": "Короткие девлоги и обзоры систем"
+        },
+        "telegram-dm": {
+          "title": "Telegram (@LeonardoFlynn)",
+          "subtitle": "Личные сообщения и быстрое обсуждение"
+        },
+        "discord-profile": {
+          "title": "Профиль Discord",
+          "subtitle": "Связаться в Discord (ID: 1352214863895728128)"
+        },
+        "roblox-profile": {
+          "title": "Roblox (olsen_023)",
+          "subtitle": "Игровой профиль"
+        }
+      }
+    },
+    "zh": {
+      "bio": "匠心与掌控 • 性能、稳定、隐私。",
+      "statusText": "正在构建 WolfieMD 与系统",
+      "sectionLinks": "链接与频道",
+      "sectionGithub": "GitHub 实时概览",
+      "previewCopy": "复制链接",
+      "previewOpen": "继续访问",
+      "copiedToast": "链接已复制到剪贴板！",
+      "items": {
+        "wa-channel": {
+          "title": "⌬The_Flynner's⌬ 官方频道",
+          "subtitle": "WhatsApp 更新、版本发布与公告"
+        },
+        "github-main": {
+          "title": "GitHub 仓库",
+          "subtitle": "探索开源机器人、脚本与配置"
+        },
+        "tiktok-updates": {
+          "title": "TikTok (@leonardo.flynn)",
+          "subtitle": "开发日志、桌面配置与系统展示"
+        },
+        "telegram-dm": {
+          "title": "Telegram (@LeonardoFlynn)",
+          "subtitle": "私信联系与快速技术交流"
+        },
+        "discord-profile": {
+          "title": "Discord 主页",
+          "subtitle": "在 Discord 上联系 (ID: 1352214863895728128)"
+        },
+        "roblox-profile": {
+          "title": "Roblox (olsen_023)",
+          "subtitle": "游戏主页与联机"
+        }
+      }
+    }
+  }
+}
