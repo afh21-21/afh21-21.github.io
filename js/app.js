@@ -142,15 +142,18 @@ function openPreviewModal(linkId) {
   const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
   const meta = dict.items[linkId] || { title: linkId, subtitle: linkObj.url };
 
-  document.getElementById('modal-icon').src = linkObj.icon;
+  document.getElementById('modal-icon').innerHTML = `<img src="${linkObj.icon}" alt="" width="26" height="26">`;
   document.getElementById('modal-title').textContent = meta.title;
   document.getElementById('modal-subtitle').textContent = meta.subtitle;
   document.getElementById('modal-url').textContent = linkObj.url;
-  document.getElementById('modal-copy-btn').textContent = dict.previewCopy;
-  document.querySelector('#modal-open-btn .btn-label').textContent = dict.previewOpen;
-  document.getElementById('modal-open-btn').href = linkObj.url;
+  
+  const copyBtn = document.getElementById('modal-copy');
+  const goBtn = document.getElementById('modal-go');
+  if (copyBtn) copyBtn.textContent = dict.previewCopy || 'Copy Link';
+  if (goBtn) goBtn.textContent = dict.previewOpen || 'Continue to Link';
+  if (goBtn) goBtn.href = linkObj.url;
 
-  document.getElementById('preview-modal').classList.remove('hidden');
+  document.getElementById('link-modal').style.display = 'grid';
 }
 
 function setupQrModal() {
@@ -178,17 +181,21 @@ function setupQrModal() {
 }
 
 function setupModalEvents() {
-  const modal = document.getElementById('preview-modal');
+  const modal = document.getElementById('link-modal');
   const closeBtn = document.getElementById('modal-close');
-  const copyBtn = document.getElementById('modal-copy-btn');
-  const openBtn = document.getElementById('modal-open-btn');
+  const copyBtn = document.getElementById('modal-copy');
+  const openBtn = document.getElementById('modal-go');
 
-  closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
+  closeBtn?.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+  
   modal?.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.add('hidden');
+    if (e.target === modal) modal.style.display = 'none';
   });
 
-  copyBtn?.addEventListener('click', () => {
+  copyBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
     if (!selectedLink) return;
     const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
     copyToClipboard(selectedLink.url, dict.copiedToast);
@@ -199,7 +206,7 @@ function setupModalEvents() {
     if (!selectedLink) return;
     triggerClickGuard(openBtn, 350, () => {
       window.open(selectedLink.url, '_blank', 'noopener,noreferrer');
-      modal.classList.add('hidden');
+      modal.style.display = 'none';
     });
   });
 }
