@@ -179,6 +179,7 @@
   position: relative;
   width: 100%;
   min-width: 0;
+  cursor: pointer; /* Memastikan kursor berubah menjadi pointer di desktop */
 }
 
 .link-card.featured {
