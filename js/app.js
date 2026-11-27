@@ -13,8 +13,10 @@ async function bootstrap() {
     renderAll();
   });
 
+  // Inisialisasi pelacak kursor untuk VS Code Pet
   setupVsCodePet();
 
+  // Otomatis ganti SVG GitHub (-dark / -light) saat atribut data-theme berubah
   const themeObserver = new MutationObserver(() => syncGithubCards());
   themeObserver.observe(document.documentElement, {
     attributes: true,
@@ -84,7 +86,7 @@ function renderAll() {
     const id = card.dataset.linkId;
     
     // Klik pada card secara keseluruhan
-    card.addEventListener('click', (e) => {
+    card.addEventListener('click', () => {
       triggerClickGuard(card, 220, () => openPreviewModal(id));
     });
 
@@ -98,6 +100,7 @@ function renderAll() {
     }
   });
 
+  // Render Live GitHub SVG Cards
   syncGithubCards();
 }
 
