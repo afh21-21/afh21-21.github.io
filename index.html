@@ -16,6 +16,18 @@
   <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
+  <!-- VS Code Pet (Pojok Kiri Atas - Mata Mengikuti Kursor) -->
+  <div id="vscode-pet" class="vscode-pet" title="Kaisar's Little Pet">
+    <div class="pet-body">
+      <div class="pet-antenna left"></div>
+      <div class="pet-antenna right"></div>
+      <div class="pet-eyes">
+        <div class="pet-pupil" id="pupil-left"></div>
+        <div class="pet-pupil" id="pupil-right"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Minimalist Top-Right Icon Controls -->
   <header class="top-controls" aria-label="Site Controls">
     <button id="btn-qr" class="icon-btn bouncy" title="Share QR Code" aria-label="QR Code">
@@ -115,23 +127,23 @@
   </main>
 
   <div id="link-modal" class="modal-backdrop" style="display: none;">
-  <div class="modal-card">
-    <button class="modal-close-btn" id="modal-close">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
-    </button>
-    <div class="modal-icon-box" id="modal-icon"></div>
-    <h3 class="modal-title" id="modal-title"></h3>
-    <p class="modal-subtitle" id="modal-subtitle"></p>
-    <div class="modal-url-box" id="modal-url"></div>
-    <div class="modal-actions">
-      <a href="#" id="modal-copy" class="btn-secondary">Copy Link</a>
-      <a href="#" id="modal-go" target="_blank" class="btn-primary">Continue to Link</a>
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-icon-box" id="modal-icon"></div>
+      <h3 class="modal-title" id="modal-title"></h3>
+      <p class="modal-subtitle" id="modal-subtitle"></p>
+      <div class="modal-url-box" id="modal-url"></div>
+      <div class="modal-actions">
+        <a href="#" id="modal-copy" class="btn-secondary">Copy Link</a>
+        <a href="#" id="modal-go" target="_blank" class="btn-primary">Continue to Link</a>
+      </div>
     </div>
   </div>
-</div>
 
   <!-- QR Code Share Modal -->
   <div id="qr-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true">
