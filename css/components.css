@@ -342,11 +342,13 @@
   background: var(--bg-page);
   font-size: 0.76rem;
   color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   width: 100%;
   box-sizing: border-box;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 80px;
+  text-align: left;
 }
 
 .modal-actions {
