@@ -1,14 +1,14 @@
 /* Bouncy Spring Physics pada Tombol & Kartu */
 .bouncy {
-  transition: transform 0.38s var(--spring-curve), background-color 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .bouncy:hover {
-  transform: translateY(-2px) scale(1.015);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .bouncy:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
   transition-duration: 0.1s;
 }
 
