@@ -13,6 +13,9 @@ async function bootstrap() {
     renderAll();
   });
 
+  // Inisialisasi pelacak kursor untuk VS Code Pet
+  setupVsCodePet();
+
   // Otomatis ganti SVG GitHub (-dark / -light) saat atribut data-theme berubah
   const themeObserver = new MutationObserver(() => syncGithubCards());
   themeObserver.observe(document.documentElement, {
@@ -30,6 +33,7 @@ async function bootstrap() {
     console.error('Gagal memuat config.json:', err);
   }
 }
+
 function renderAll() {
   if (!appConfig) return;
   const dict = appConfig.i18n[currentLang] || appConfig.i18n['en-US'];
@@ -105,6 +109,28 @@ function syncGithubCards() {
   targets.forEach(({ id, file }) => {
     const img = document.getElementById(id);
     if (img) img.src = `${base}/${file}?d=${today}`;
+  });
+}
+
+function setupVsCodePet() {
+  document.addEventListener('mousemove', (e) => {
+    const pet = document.getElementById('vscode-pet');
+    if (!pet) return;
+    
+    const rect = pet.getBoundingClientRect();
+    const petX = rect.left + rect.width / 2;
+    const petY = rect.top + rect.height / 2;
+    
+    const angle = Math.atan2(e.clientY - petY, e.clientX - petX);
+    const distance = Math.min(2, Math.hypot(e.clientX - petX, e.clientY - petY) / 50);
+    
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+    
+    const pupils = document.querySelectorAll('.pet-pupil');
+    pupils.forEach(pupil => {
+      pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
   });
 }
 
